@@ -8,17 +8,40 @@ Supports:
   - List open PRs
   - Search repositories
 
-Requires GITHUB_TOKEN env var.
+Uses GITHUB_TOKEN env var, or auto-detects from `gh` CLI auth.
 Token needs scopes: repo, read:org
 """
 import os
+import subprocess
 import requests
 
 GITHUB_API = "https://api.github.com"
 
+_cached_token = None
+
 
 def get_token() -> str | None:
-    return os.environ.get("GITHUB_TOKEN")
+    """Get GitHub token from env var or gh CLI."""
+    global _cached_token
+    if _cached_token:
+        return _cached_token
+
+    # Try env var first
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        _cached_token = token
+        return token
+
+    # Fall back to gh CLI
+    try:
+        result = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True)
+        if result.returncode == 0 and result.stdout.strip():
+            _cached_token = result.stdout.strip()
+            return _cached_token
+    except FileNotFoundError:
+        pass
+
+    return None
 
 
 def _headers():

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+
+# Notes (local data)
+notes/
+
+# Audio temp files
+*.wav
+*.mp3
+*.aiff
+
+# Secrets
+.env

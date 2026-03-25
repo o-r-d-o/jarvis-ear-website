@@ -1,0 +1,8 @@
+# Audio Pipeline
+pyaudio          # Microphone access
+requests         # HTTP calls to APIs
+anthropic        # Claude API (intent parsing)
+
+# Optional (for enhanced features)
+# openai         # TTS (text-to-speech) — can use macOS 'say' as fallback
+# slack-sdk      # Direct Slack integration

@@ -35,7 +35,8 @@ import requests
 
 
 TEXT_MODE = "--text" in sys.argv
-MCP_URL = "http://localhost:8000/mcp/"
+MCP_URL = os.environ.get("MCP_SERVER_URL", "http://localhost:8000/mcp/")
+MCP_AUTH_TOKEN = os.environ.get("MCP_AUTH_TOKEN", "")
 
 
 async def get_mcp_tools(session: ClientSession) -> list[dict]:
@@ -137,9 +138,12 @@ async def run_pipeline():
     print("=" * 60)
 
     # Step 1: Connect to MCP server
-    print("\n  [MCP] Connecting to Jarvis MCP Server...")
+    is_cloud = "fastmcp.app" in MCP_URL or "railway" in MCP_URL
+    print(f"\n  [MCP] Connecting to {'CLOUD' if is_cloud else 'LOCAL'} MCP Server...")
+    print(f"  [MCP] URL: {MCP_URL}")
 
-    async with streamablehttp_client(MCP_URL) as (read, write, _):
+    headers = {"Authorization": f"Bearer {MCP_AUTH_TOKEN}"} if MCP_AUTH_TOKEN else {}
+    async with streamablehttp_client(MCP_URL, headers=headers) as (read, write, _):
         async with ClientSession(read, write) as session:
             await session.initialize()
 

@@ -204,8 +204,13 @@ Respond with JSON only (no markdown, no code blocks, just raw JSON):
     // For read_slack: {"channel": "..."}
     // For answer_question: {"question": "..."}
   },
-  "spoken_response": "Brief confirmation to speak back to the user (1 sentence)"
-}"""
+  "spoken_response": "Brief response to speak back to the user (1 sentence). For answer_question: ACTUALLY ANSWER the question here with the real answer, don't say 'I'm checking' or 'let me look that up'. For actions: confirm what was done."
+}
+
+IMPORTANT rules for spoken_response:
+- For answer_question: ANSWER the question directly. Example: "The weather in Delhi today is likely around 35 degrees celsius and sunny." If you don't know real-time data, say so honestly: "I don't have access to real-time weather data, but Delhi is typically warm this time of year."
+- For actions (send_slack, create_github_issue, etc.): Confirm what you're about to do. Example: "Sending a message to John on Slack."
+- Keep it to 1-2 sentences max."""
 
 
 def parse_intent(transcript: str) -> dict:

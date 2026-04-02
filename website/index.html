@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>Jarvis Ear — AI-Powered Behind-Ear Wearable with Camera</title>
+  <meta name="description" content="Jarvis Ear is a lightweight 18g behind-ear AI wearable with a 2MP camera. Voice commands to send Slack messages, create GitHub issues, take notes — hands-free. Open source. Made in India.">
+  <meta name="keywords" content="AI wearable, smart earpiece, behind-ear device, voice assistant, camera earbuds, AI copilot, hands-free productivity, ESP32, open source hardware, made in India">
+  <meta name="author" content="Jarvis Ear">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://jarvisear.com/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jarvisear.com/">
+  <meta property="og:title" content="Jarvis Ear — AI Copilot, Behind Your Ear">
+  <meta property="og:description" content="18g behind-ear wearable with 2MP camera. Voice-to-action: Slack, GitHub, Calendar, Notes — all hands-free. Open source. Made in India.">
+  <meta property="og:image" content="https://jarvisear.com/assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Jarvis Ear">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jarvis Ear — AI Copilot, Behind Your Ear">
+  <meta name="twitter:description" content="18g behind-ear wearable with 2MP camera. Voice-to-action for developers. Open source. Made in India.">
+  <meta name="twitter:image" content="https://jarvisear.com/assets/images/og-image.png">
+
+  <!-- Favicon (replace with actual favicon later) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%2300d4ff'/></svg>">
+  <meta name="theme-color" content="#050507">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Jarvis Ear",
+    "description": "AI-powered behind-ear wearable with 2MP camera. Voice commands to send Slack messages, create GitHub issues, manage calendar, and take notes — all hands-free.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Jarvis Ear"
+    },
+    "category": "Wearable Technology",
+    "image": "https://jarvisear.com/assets/images/og-image.png",
+    "url": "https://jarvisear.com",
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Jarvis Ear",
+      "url": "https://jarvisear.com"
+    },
+    "weight": {
+      "@type": "QuantitativeValue",
+      "value": "18",
+      "unitCode": "GRM"
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Camera",
+        "value": "OV2640 2MP"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "MCU",
+        "value": "ESP32-S3"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Battery",
+        "value": "400mAh LiPo"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Connectivity",
+        "value": "WiFi + BLE 5.0"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <a href="/" class="nav-logo" aria-label="Jarvis Ear home">
+    <span class="dot" aria-hidden="true"></span>
+    JARVIS EAR
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#specs">Specs</a></li>
+    <li><a href="#use-cases">Use cases</a></li>
+  </ul>
+  <a href="#waitlist" class="nav-cta">JOIN WAITLIST</a>
+  <button class="nav-mobile-toggle" aria-label="Toggle menu" onclick="this.closest('nav').classList.toggle('mobile-open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-version-badge">
+        <span class="pulse" aria-hidden="true"></span>
+        NOW ACCEPTING PRE-ORDERS
+      </div>
+
+      <h1 id="hero-heading" class="hero-headline">
+        <span class="line">Your AI copilot<span class="accent">,</span></span>
+        <span class="line accent">behind your ear<span class="dim">.</span></span>
+      </h1>
+
+      <p class="hero-sub">
+        A behind-ear wearable with a camera that turns your voice and vision into action. Send messages, create issues, take notes — all hands-free, powered by AI.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#waitlist" class="btn-primary">JOIN WAITLIST</a>
+        <a href="#specs" class="btn-secondary">VIEW SPECS</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value">18<span class="unit">g</span></div>
+          <div class="hero-stat-label">WEIGHT</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">2<span class="unit">MP</span></div>
+          <div class="hero-stat-label">CAMERA</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">8<span class="unit">hr</span></div>
+          <div class="hero-stat-label">BATTERY</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">&lt;$25</div>
+          <div class="hero-stat-label">BOM COST</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-device" aria-label="Jarvis Ear device schematic showing behind-ear placement with camera, ESP32-S3 MCU, battery, and speaker">
+      <div class="device-glow" aria-hidden="true"></div>
+      <svg viewBox="0 0 420 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Jarvis Ear device blueprint">
+        <title>Jarvis Ear — behind-ear wearable device schematic</title>
+        <!-- Ear silhouette -->
+        <ellipse cx="160" cy="250" rx="70" ry="110" fill="none" stroke="#1a1a22" stroke-width="2"/>
+        <ellipse cx="160" cy="250" rx="38" ry="70" fill="none" stroke="#1a1a22" stroke-width="1.2"/>
+        <circle cx="152" cy="258" r="9" fill="#0a0a0e" stroke="#1a1a22" stroke-width="1"/>
+
+        <!-- Ear hook -->
+        <path d="M 110 190 Q 105 110, 180 85 Q 270 65, 295 130"
+              fill="none" stroke="var(--cyan)" stroke-width="3" stroke-linecap="round"
+              opacity="0.8"/>
+
+        <text x="170" y="75" font-family="var(--mono)" font-size="8" fill="#6a6a78" letter-spacing="1.5">SILICONE + Ni-Ti HOOK</text>
+
+        <!-- Speaker in front of ear -->
+        <rect x="90" y="228" width="40" height="28" rx="10" fill="#0f1a12" stroke="var(--green)" stroke-width="1.5" opacity="0.8"/>
+        <text x="110" y="244" text-anchor="middle" font-family="var(--mono)" font-size="7" fill="var(--green)" opacity="0.7">SPEAKER</text>
+        <text x="110" y="254" text-anchor="middle" font-family="var(--mono)" font-size="6" fill="#6a6a78">8&#937;</text>
+
+        <!-- Sound wave lines -->
+        <path d="M 133 242 Q 140 235, 147 242" fill="none" stroke="var(--green)" stroke-width="0.8" opacity="0.3"/>
+        <path d="M 136 242 Q 143 232, 150 242" fill="none" stroke="var(--green)" stroke-width="0.8" opacity="0.2"/>
+
+        <!-- Wire through hook -->
+        <path d="M 110 228 Q 110 190, 110 165 Q 110 110, 180 85 Q 270 65, 290 115 Q 298 135, 298 155"
+              fill="none" stroke="var(--green)" stroke-width="1" stroke-dasharray="4 3" opacity="0.3"/>
+
+        <!-- Main pod -->
+        <rect x="270" y="115" width="110" height="230" rx="35" fill="#0a0a12" stroke="var(--cyan)" stroke-width="2"/>
+        <rect x="274" y="119" width="102" height="222" rx="33" fill="none" stroke="var(--cyan)" stroke-width="0.3" opacity="0.3"/>
+
+        <!-- Camera -->
+        <circle cx="325" cy="155" r="14" fill="#0a0a0a" stroke="var(--orange)" stroke-width="1.5"/>
+        <circle cx="325" cy="155" r="7" fill="#050507" stroke="var(--orange)" stroke-width="0.8" opacity="0.7"/>
+        <circle cx="325" cy="155" r="2.5" fill="var(--orange)" opacity="0.4"/>
+        <text x="398" y="152" font-family="var(--mono)" font-size="8" fill="var(--orange)" opacity="0.7">OV2640</text>
+        <text x="398" y="162" font-family="var(--mono)" font-size="7" fill="#6a6a78">2MP CAM</text>
+        <line x1="339" y1="155" x2="394" y2="155" stroke="var(--orange)" stroke-width="0.5" stroke-dasharray="3 2" opacity="0.4"/>
+
+        <!-- MCU -->
+        <rect x="293" y="182" width="64" height="28" rx="4" fill="#0a1020" stroke="#0066cc" stroke-width="1"/>
+        <text x="325" y="198" text-anchor="middle" font-family="var(--mono)" font-size="7.5" fill="#4499dd" font-weight="600">ESP32-S3</text>
+        <text x="398" y="194" font-family="var(--mono)" font-size="7" fill="#6a6a78">WiFi+BLE</text>
+        <line x1="357" y1="196" x2="394" y2="196" stroke="#0066cc" stroke-width="0.5" stroke-dasharray="3 2" opacity="0.4"/>
+
+        <!-- Battery -->
+        <rect x="293" y="220" width="64" height="60" rx="5" fill="#141408" stroke="#666620" stroke-width="1"/>
+        <text x="325" y="248" text-anchor="middle" font-family="var(--mono)" font-size="7" fill="#aaaa44">400mAh</text>
+        <text x="325" y="260" text-anchor="middle" font-family="var(--mono)" font-size="6" fill="#6a6a78">LiPo 3.7V</text>
+
+        <!-- Charger -->
+        <rect x="300" y="290" width="50" height="18" rx="3" fill="#140a14" stroke="#8833aa" stroke-width="1"/>
+        <text x="325" y="302" text-anchor="middle" font-family="var(--mono)" font-size="6.5" fill="#aa55cc">TP4056</text>
+
+        <!-- Mic -->
+        <circle cx="325" cy="325" r="8" fill="#0a140a" stroke="var(--green)" stroke-width="1.2"/>
+        <text x="325" y="328" text-anchor="middle" font-family="var(--mono)" font-size="6" fill="var(--green)">MIC</text>
+
+        <!-- USB-C port -->
+        <rect x="315" y="342" width="20" height="6" rx="2" fill="#1a1a22" stroke="#6a6a78" stroke-width="0.8"/>
+        <text x="325" y="360" text-anchor="middle" font-family="var(--mono)" font-size="6" fill="#6a6a78">USB-C</text>
+
+        <!-- LED indicator -->
+        <circle cx="325" cy="130" r="3" fill="var(--cyan)" opacity="0.6">
+          <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Dimension markers -->
+        <line x1="260" y1="115" x2="260" y2="345" stroke="#ffaa00" stroke-width="0.5" opacity="0.4"/>
+        <text x="253" y="235" font-family="var(--mono)" font-size="7" fill="#ffaa00" opacity="0.5" text-anchor="end" transform="rotate(-90, 253, 235)">28mm</text>
+
+        <!-- Head/outside labels -->
+        <text x="50" y="410" font-family="var(--mono)" font-size="9" fill="#2a2a35" letter-spacing="2">&#8592; HEAD</text>
+        <text x="340" y="410" font-family="var(--mono)" font-size="9" fill="#2a2a35" letter-spacing="2">OUTSIDE &#8594;</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURES ═══════════ -->
+<section class="features" id="features" aria-labelledby="features-heading">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">CAPABILITIES</div>
+      <h2 id="features-heading" class="section-title">What makes <span>Jarvis</span> different</h2>
+    </div>
+
+    <div class="features-grid">
+      <article class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <div class="feature-number">01</div>
+        <h3 class="feature-name">Voice Commands</h3>
+        <p class="feature-desc">Speak naturally. Jarvis understands context, parses intent, and executes — no wake words, no menus.</p>
+      </article>
+
+      <article class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <div class="feature-number">02</div>
+        <h3 class="feature-name">AI Assistant</h3>
+        <p class="feature-desc">Powered by frontier LLMs. Ask questions, get summaries, reason through problems — all through your ear.</p>
+      </article>
+
+      <article class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <div class="feature-number">03</div>
+        <h3 class="feature-name">Camera Vision</h3>
+        <p class="feature-desc">Forward-facing 2MP camera sees what you see. Read signs, scan documents, identify objects — hands-free.</p>
+      </article>
+
+      <article class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="12" rx="2" ry="2"/><line x1="23" y1="13" x2="23" y2="11"/><rect x="4" y="9" width="12" height="6" rx="1" fill="var(--cyan)" opacity="0.2"/></svg>
+        </div>
+        <div class="feature-number">04</div>
+        <h3 class="feature-name">All-Day Battery</h3>
+        <p class="feature-desc">Up to 8 hours with camera + voice. 20 minutes to full via USB-C. Sleep current under 5&#181;A.</p>
+      </article>
+
+      <article class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+        </div>
+        <div class="feature-number">05</div>
+        <h3 class="feature-name">Featherweight</h3>
+        <p class="feature-desc">18 grams with camera — lighter than most earbuds. Ni-Ti shape memory ear hook adapts to any ear, stays put all day.</p>
+      </article>
+
+      <article class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <div class="feature-number">06</div>
+        <h3 class="feature-name">Open Source</h3>
+        <p class="feature-desc">Firmware, server, action pipeline — all open. Build your own integrations. Extend the tool ecosystem.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="how-it-works" id="how-it-works" aria-labelledby="how-heading">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">PIPELINE</div>
+      <h2 id="how-heading" class="section-title">Speak it. <span>Done.</span></h2>
+      <p class="section-desc">From voice to action in under 2 seconds. No app to open, no screen to look at.</p>
+    </div>
+
+    <div class="steps-container reveal">
+      <div class="step">
+        <div class="step-number" aria-hidden="true">01</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke="var(--cyan)" fill="none" stroke-width="1.5">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          </svg>
+        </div>
+        <h3 class="step-title">SPEAK</h3>
+        <p class="step-desc">Tap the button or use always-on detection. Speak your command naturally.</p>
+      </div>
+
+      <div class="step-arrow" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M 8 20 L 32 20 M 26 14 L 32 20 L 26 26" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="step">
+        <div class="step-number" aria-hidden="true">02</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke="var(--cyan)" fill="none" stroke-width="1.5">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3 class="step-title">AI PROCESSES</h3>
+        <p class="step-desc">Groq Whisper transcribes. LLM parses intent. MCP server routes to the right tool.</p>
+      </div>
+
+      <div class="step-arrow" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M 8 20 L 32 20 M 26 14 L 32 20 L 26 26" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+
+      <div class="step">
+        <div class="step-number" aria-hidden="true">03</div>
+        <div class="step-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke="var(--cyan)" fill="none" stroke-width="1.5">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h3 class="step-title">ACTION TAKEN</h3>
+        <p class="step-desc">Message sent. Issue created. Note saved. You hear a confirmation in your ear.</p>
+      </div>
+    </div>
+
+    <!-- Command demo terminal -->
+    <div class="command-demo reveal" aria-label="Live demo showing voice commands and Jarvis responses">
+      <div class="demo-header" aria-hidden="true">
+        <span class="demo-dot r"></span>
+        <span class="demo-dot y"></span>
+        <span class="demo-dot g"></span>
+        <span class="demo-title">jarvis-ear — live demo</span>
+      </div>
+      <div class="demo-lines">
+        <div class="demo-line">
+          <span class="demo-prompt">you:</span>
+          <span class="demo-voice">"Send Raj a message on Slack — I'll be 10 minutes late to standup"</span>
+        </div>
+        <div class="demo-line">
+          <span class="demo-prompt">jarvis:</span>
+          <span class="demo-response">Parsed: slack.send_message &#8594; #standup &#8594; @raj</span>
+        </div>
+        <div class="demo-line">
+          <span class="demo-prompt">&nbsp;&nbsp;&nbsp;&#8594;</span>
+          <span class="demo-action">Message sent to Raj: "I'll be 10 minutes late to standup"</span>
+        </div>
+        <div class="demo-line">
+          <span class="demo-prompt">you:</span>
+          <span class="demo-voice">"Create a GitHub issue — fix the login timeout on mobile"</span>
+        </div>
+        <div class="demo-line">
+          <span class="demo-prompt">jarvis:</span>
+          <span class="demo-response">Parsed: github.create_issue &#8594; repo:ordo &#8594; label:bug</span>
+        </div>
+        <div class="demo-line">
+          <span class="demo-prompt">&nbsp;&nbsp;&nbsp;&#8594;</span>
+          <span class="demo-action">Issue #247 created: "Fix login timeout on mobile"</span>
+        </div>
+        <div class="demo-line">
+          <span class="demo-prompt">you:</span>
+          <span class="demo-voice">"Note: FSRTEK insoles cost 5 to 15 dollars at volume"</span>
+        </div>
+        <div class="demo-line">
+          <span class="demo-prompt">jarvis:</span>
+          <span class="demo-response">Parsed: notes.save &#8594; tagged: #hardware #pricing</span>
+        </div>
+        <div class="demo-line">
+          <span class="demo-prompt">&nbsp;&nbsp;&nbsp;&#8594;</span>
+          <span class="demo-action">Note saved.<span class="demo-cursor" aria-hidden="true"></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SPECS ═══════════ -->
+<section class="specs-section" id="specs" aria-labelledby="specs-heading">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">HARDWARE</div>
+      <h2 id="specs-heading" class="section-title">What's <span>inside.</span></h2>
+      <p class="section-desc">Audio + vision in a single behind-ear pod. ESP32-S3 with WiFi, BLE, and a forward-facing camera. Open-source software stack.</p>
+    </div>
+
+    <div class="specs-grid">
+      <div class="spec-card reveal reveal-delay-1">
+        <div class="spec-badge">JARVIS EAR</div>
+        <h3 class="spec-card-title">Audio + Vision</h3>
+        <p class="spec-card-sub">See what you see, hear what you say</p>
+        <ul class="spec-list">
+          <li class="spec-row"><span class="spec-key">MCU</span><span class="spec-val">ESP32-S3</span></li>
+          <li class="spec-row"><span class="spec-key">Connectivity</span><span class="spec-val">WiFi + BLE 5.0</span></li>
+          <li class="spec-row"><span class="spec-key">Camera</span><span class="spec-val">OV2640 2MP</span></li>
+          <li class="spec-row"><span class="spec-key">Battery</span><span class="spec-val">400mAh LiPo</span></li>
+          <li class="spec-row"><span class="spec-key">Battery life</span><span class="spec-val">6&#8211;8 hours</span></li>
+          <li class="spec-row"><span class="spec-key">Weight</span><span class="spec-val">~18g</span></li>
+          <li class="spec-row"><span class="spec-key">Size</span><span class="spec-val">28 &#215; 18 &#215; 10 mm</span></li>
+          <li class="spec-row"><span class="spec-key">Charging</span><span class="spec-val">USB-C (TP4056)</span></li>
+          <li class="spec-row"><span class="spec-key">Speaker</span><span class="spec-val">8&#937; balanced armature</span></li>
+          <li class="spec-row"><span class="spec-key">Ear hook</span><span class="spec-val">Silicone + Ni-Ti alloy</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ USE CASES ═══════════ -->
+<section class="use-cases" id="use-cases" aria-labelledby="usecases-heading">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">WORKFLOWS</div>
+      <h2 id="usecases-heading" class="section-title">Built for builders<span>.</span></h2>
+      <p class="section-desc">Jarvis integrates with the tools you already use. Voice becomes your fastest input method.</p>
+    </div>
+
+    <div class="use-cases-grid">
+      <article class="use-case-card reveal reveal-delay-1">
+        <div class="use-case-tag">DEVELOPER</div>
+        <h3 class="use-case-title">Slack + GitHub</h3>
+        <p class="use-case-desc">Send DMs, post to channels, create issues, list PRs — without switching context or touching your phone.</p>
+        <div class="use-case-example">"Create an issue on ordo — fix auth timeout on mobile"</div>
+      </article>
+
+      <article class="use-case-card reveal reveal-delay-2">
+        <div class="use-case-tag">PRODUCTIVITY</div>
+        <h3 class="use-case-title">Notes + Calendar</h3>
+        <p class="use-case-desc">Capture ideas the moment they hit. Schedule meetings while walking. Search your notes by voice.</p>
+        <div class="use-case-example">"Schedule a call with Raj tomorrow at 3pm"</div>
+      </article>
+
+      <article class="use-case-card reveal reveal-delay-3">
+        <div class="use-case-tag">VISION</div>
+        <h3 class="use-case-title">Visual AI</h3>
+        <p class="use-case-desc">Read text from whiteboards, scan business cards, identify components, translate signs — all through the camera.</p>
+        <div class="use-case-example">"What does this circuit board component say?"</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WAITLIST ═══════════ -->
+<section class="waitlist" id="waitlist" aria-labelledby="waitlist-heading">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" style="justify-content:center">EARLY ACCESS</div>
+      <h2 id="waitlist-heading" class="section-title">Get Jarvis first<span>.</span></h2>
+      <p class="section-desc">
+        Join the waitlist for early access pricing and dev kit availability.
+      </p>
+    </div>
+
+    <form class="waitlist-form reveal reveal-delay-1" onsubmit="handleWaitlist(event)">
+      <input type="email" class="waitlist-input" placeholder="you@email.com" required aria-label="Email address" autocomplete="email">
+      <button type="submit" class="waitlist-btn">JOIN</button>
+    </form>
+
+    <div class="waitlist-note reveal reveal-delay-2">No spam. We'll email you once when it ships.</div>
+
+    <div class="waitlist-badge reveal reveal-delay-3">
+      <span class="india-flag" aria-label="Indian flag">&#127470;&#127475;</span>
+      DESIGNED &amp; BUILT IN INDIA
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-left">&copy; 2026 JARVIS EAR</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://x.com" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+        <a href="mailto:hello@jarvisear.com">Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- JS — deferred for performance -->
+<script src="assets/js/main.js" defer></script>
+
+</body>
+</html>

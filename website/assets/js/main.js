@@ -1,10 +1,8 @@
 // ─── Navbar scroll effect ───
 const navbar = document.getElementById('navbar');
-let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-  lastScroll = window.scrollY;
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
 // ─── Mobile menu toggle ───
@@ -16,7 +14,6 @@ navToggle.addEventListener('click', () => {
   mobileMenu.classList.toggle('open');
 });
 
-// Close mobile menu on link click
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     navToggle.classList.remove('active');
@@ -34,16 +31,63 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
 revealEls.forEach(el => revealObserver.observe(el));
+
+// ─── Word-by-word reveal on scroll ───
+document.querySelectorAll('.word-reveal').forEach(el => {
+  const text = el.textContent.trim();
+  el.innerHTML = text.split(/\s+/).map(word =>
+    `<span class="word">${word}</span>`
+  ).join(' ');
+
+  const words = el.querySelectorAll('.word');
+
+  const wordObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Animate words based on scroll position within the viewport
+        const updateWords = () => {
+          const rect = el.getBoundingClientRect();
+          const viewH = window.innerHeight;
+          // Progress from 0 (just entered) to 1 (centered or past)
+          const progress = Math.max(0, Math.min(1,
+            1 - (rect.top / (viewH * 0.7))
+          ));
+          const litCount = Math.floor(progress * words.length);
+          words.forEach((w, i) => {
+            w.classList.toggle('lit', i < litCount);
+          });
+        };
+
+        const onScroll = () => requestAnimationFrame(updateWords);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        updateWords();
+
+        // Clean up when fully revealed
+        const cleanup = () => {
+          const allLit = Array.from(words).every(w => w.classList.contains('lit'));
+          if (allLit) {
+            window.removeEventListener('scroll', onScroll);
+          }
+        };
+        window.addEventListener('scroll', cleanup, { passive: true });
+
+        wordObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  wordObserver.observe(el);
+});
 
 // ─── Terminal line stagger ───
 const terminalLines = document.querySelectorAll('.t-line');
 terminalLines.forEach((line, i) => {
   line.style.opacity = '0';
-  line.style.transform = 'translateY(6px)';
-  line.style.transition = `opacity 0.35s ease ${i * 0.1}s, transform 0.35s ease ${i * 0.1}s`;
+  line.style.transform = 'translateY(8px)';
+  line.style.transition = `opacity 0.4s ease ${i * 0.12}s, transform 0.4s ease ${i * 0.12}s`;
 });
 
 const terminalEl = document.querySelector('.terminal');
@@ -58,7 +102,7 @@ if (terminalEl) {
         termObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.25 });
+  }, { threshold: 0.2 });
   termObserver.observe(terminalEl);
 }
 
@@ -94,7 +138,7 @@ if (waitlistForm) {
   });
 }
 
-// ─── Device SVG subtle parallax on scroll ───
+// ─── Parallax on device image ───
 const deviceWrapper = document.getElementById('deviceWrapper');
 if (deviceWrapper) {
   window.addEventListener('scroll', () => {
@@ -102,6 +146,33 @@ if (deviceWrapper) {
     const center = rect.top + rect.height / 2;
     const viewCenter = window.innerHeight / 2;
     const offset = (center - viewCenter) / window.innerHeight;
-    deviceWrapper.style.transform = `translateY(${offset * -12}px)`;
+    deviceWrapper.style.transform = `translateY(${offset * -16}px)`;
   }, { passive: true });
 }
+
+// ─── Parallax on lifestyle break ───
+const lifestyleBg = document.querySelector('.lifestyle-bg');
+if (lifestyleBg) {
+  window.addEventListener('scroll', () => {
+    const section = lifestyleBg.closest('.lifestyle-break');
+    const rect = section.getBoundingClientRect();
+    const viewH = window.innerHeight;
+    if (rect.top < viewH && rect.bottom > 0) {
+      const progress = (viewH - rect.top) / (viewH + rect.height);
+      lifestyleBg.style.transform = `translateY(${progress * -30}px) scale(1.05)`;
+    }
+  }, { passive: true });
+}
+
+// ─── Stagger feature cards on hover (subtle glow) ───
+document.querySelectorAll('.feature-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(232,168,124,0.04) 0%, var(--bg-card) 60%)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.background = '';
+  });
+});

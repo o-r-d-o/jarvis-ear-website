@@ -31,12 +31,12 @@
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="assets/images/ordo.jpg">
   <link rel="apple-touch-icon" href="assets/images/ordo.jpg">
-  <meta name="theme-color" content="#09090b">
+  <meta name="theme-color" content="#0a0a0a">
 
-  <!-- Fonts -->
+  <!-- Fonts — Editorial Serif + Clean Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -65,12 +65,15 @@
 </head>
 <body>
 
+<!-- Film grain overlay -->
+<div class="grain" aria-hidden="true"></div>
+
 <!-- ═══════════ NAVIGATION ═══════════ -->
 <nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="/" class="nav-logo" aria-label="Ordo home">
-      <img src="assets/images/ordo.jpg" alt="Ordo logo" style="height:32px;width:32px;border-radius:50%;object-fit:cover;">
-      ORDO
+      <img src="assets/images/ordo.jpg" alt="Ordo logo">
+      Ordo
     </a>
     <div class="nav-center">
       <a href="#features">Features</a>
@@ -99,6 +102,7 @@
 <section class="hero" aria-labelledby="hero-heading">
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-gradient"></div>
+    <div class="hero-gradient-2"></div>
     <div class="hero-grid-lines"></div>
   </div>
 
@@ -115,7 +119,7 @@
       </h1>
 
       <p class="hero-sub anim-in" style="--delay: 0.2s">
-        An 18g wearable with a camera that turns voice and vision into action.
+        An 18-gram wearable with a camera that turns voice and vision into action.
         Send messages, create issues, take notes — hands-free.
       </p>
 
@@ -183,7 +187,7 @@
   </div>
 </section>
 
-<!-- ═══════════ FEATURES — BENTO GRID ═══════════ -->
+<!-- ═══════════ FEATURES ═══════════ -->
 <section class="features" id="features" aria-labelledby="features-heading">
   <div class="container">
     <div class="section-header reveal">
@@ -191,69 +195,84 @@
       <h2 id="features-heading" class="section-title">Everything you need,<br><em>nothing you don't.</em></h2>
     </div>
 
-    <div class="bento-grid">
-      <article class="bento-card bento-wide reveal" style="--delay:0.05s">
-        <div class="bento-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-        </div>
-        <div class="bento-content">
+    <div class="features-grid">
+
+      <!-- Feature hero card with image placeholder -->
+      <article class="feature-card feature-card-hero reveal" style="--delay:0.05s">
+        <div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </div>
           <h3>Voice Commands</h3>
           <p>Speak naturally. Ordo understands context, parses intent, and executes. No wake words, no menus, no friction.</p>
+          <div class="feature-tag">Natural Language</div>
         </div>
-        <div class="bento-tag">Natural Language</div>
+        <div class="feature-image-placeholder">
+          <span class="placeholder-label">Lifestyle photo<br>Person speaking to Ordo</span>
+        </div>
       </article>
 
-      <article class="bento-card reveal" style="--delay:0.1s">
-        <div class="bento-icon accent-amber">
+      <article class="feature-card reveal" style="--delay:0.1s">
+        <div class="feature-icon accent-amber">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </div>
-        <div class="bento-content">
-          <h3>Camera Vision</h3>
-          <p>2MP forward-facing camera sees what you see. Read signs, scan docs, identify objects.</p>
-        </div>
+        <h3>Camera Vision</h3>
+        <p>2MP forward-facing camera sees what you see. Read signs, scan docs, identify objects.</p>
       </article>
 
-      <article class="bento-card reveal" style="--delay:0.15s">
-        <div class="bento-icon accent-indigo">
+      <article class="feature-card reveal" style="--delay:0.15s">
+        <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
         </div>
-        <div class="bento-content">
-          <h3>AI Assistant</h3>
-          <p>Powered by frontier LLMs. Ask questions, get summaries, reason through problems.</p>
-        </div>
+        <h3>AI Assistant</h3>
+        <p>Powered by frontier LLMs. Ask questions, get summaries, reason through problems.</p>
       </article>
 
-      <article class="bento-card reveal" style="--delay:0.2s">
-        <div class="bento-icon accent-green">
+      <article class="feature-card reveal" style="--delay:0.2s">
+        <div class="feature-icon accent-green">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="6" width="22" height="12" rx="2"/><line x1="23" y1="13" x2="23" y2="11"/></svg>
         </div>
-        <div class="bento-content">
-          <h3>8-Hour Battery</h3>
-          <p>All-day use with camera + voice. 20 min to full charge via USB-C.</p>
-        </div>
+        <h3>8-Hour Battery</h3>
+        <p>All-day use with camera + voice. 20 min to full charge via USB-C.</p>
       </article>
 
-      <article class="bento-card bento-wide reveal" style="--delay:0.25s">
-        <div class="bento-icon accent-purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
-        </div>
-        <div class="bento-content">
-          <h3>18 Grams</h3>
-          <p>Lighter than most earbuds. Ni-Ti shape memory ear hook adapts to any ear and stays put all day. You forget it's there.</p>
-        </div>
-        <div class="bento-tag">Featherweight</div>
-      </article>
-
-      <article class="bento-card reveal" style="--delay:0.3s">
-        <div class="bento-icon">
+      <article class="feature-card reveal" style="--delay:0.25s">
+        <div class="feature-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
-        <div class="bento-content">
-          <h3>Instant Actions</h3>
-          <p>Voice to action in under 2 seconds. Slack, GitHub, Calendar, Notes — no app switching.</p>
+        <h3>Instant Actions</h3>
+        <p>Voice to action in under 2 seconds. Slack, GitHub, Calendar, Notes — no app switching.</p>
+      </article>
+
+      <!-- Full-width feature with image placeholder -->
+      <article class="feature-card feature-card-hero reveal" style="--delay:0.3s">
+        <div class="feature-image-placeholder">
+          <span class="placeholder-label">Product close-up<br>Behind-ear detail shot</span>
+        </div>
+        <div>
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+          </div>
+          <h3>18 Grams</h3>
+          <p>Lighter than most earbuds. Ni-Ti shape memory ear hook adapts to any ear and stays put all day. You forget it's there.</p>
+          <div class="feature-tag">Featherweight</div>
         </div>
       </article>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ LIFESTYLE BREAK ═══════════ -->
+<section class="lifestyle-break reveal" aria-label="Brand statement">
+  <div class="lifestyle-bg" aria-hidden="true">
+    <!-- Replace with lifestyle photograph: style="background-image: url('assets/images/lifestyle-1.jpg'); background-size: cover; background-position: center;" -->
+  </div>
+  <div class="lifestyle-overlay" aria-hidden="true"></div>
+  <div class="lifestyle-content">
+    <p class="lifestyle-quote word-reveal">
+      70% of your day happens away from a keyboard. We're building an AI that lives in those moments.
+    </p>
+    <p class="lifestyle-caption">The Ordo philosophy</p>
   </div>
 </section>
 
@@ -276,10 +295,6 @@
         <p>Tap the button or use always-on detection. Say your command naturally.</p>
       </div>
 
-      <div class="pipeline-connector" aria-hidden="true">
-        <svg viewBox="0 0 80 2"><line x1="0" y1="1" x2="80" y2="1" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4"/></svg>
-      </div>
-
       <div class="pipeline-step">
         <div class="pipeline-num">02</div>
         <div class="pipeline-icon">
@@ -287,10 +302,6 @@
         </div>
         <h3>AI Processes</h3>
         <p>Whisper transcribes. LLM parses intent. MCP server routes to the right tool.</p>
-      </div>
-
-      <div class="pipeline-connector" aria-hidden="true">
-        <svg viewBox="0 0 80 2"><line x1="0" y1="1" x2="80" y2="1" stroke="var(--border)" stroke-width="1" stroke-dasharray="4 4"/></svg>
       </div>
 
       <div class="pipeline-step">
@@ -313,14 +324,14 @@
       </div>
       <div class="terminal-body">
         <div class="t-line"><span class="t-prompt">you</span><span class="t-voice">"Send Raj a message on Slack — I'll be 10 minutes late to standup"</span></div>
-        <div class="t-line"><span class="t-prompt">ordo</span><span class="t-response">slack.send_message → #standup → @raj</span></div>
-        <div class="t-line"><span class="t-prompt t-arrow">→</span><span class="t-action">Message sent to Raj: "I'll be 10 minutes late to standup"</span></div>
+        <div class="t-line"><span class="t-prompt">ordo</span><span class="t-response">slack.send_message &rarr; #standup &rarr; @raj</span></div>
+        <div class="t-line"><span class="t-prompt t-arrow">&rarr;</span><span class="t-action">Message sent to Raj: "I'll be 10 minutes late to standup"</span></div>
         <div class="t-line t-gap"><span class="t-prompt">you</span><span class="t-voice">"Create a GitHub issue — fix the login timeout on mobile"</span></div>
-        <div class="t-line"><span class="t-prompt">ordo</span><span class="t-response">github.create_issue → repo:ordo → label:bug</span></div>
-        <div class="t-line"><span class="t-prompt t-arrow">→</span><span class="t-action">Issue #247 created: "Fix login timeout on mobile"</span></div>
+        <div class="t-line"><span class="t-prompt">ordo</span><span class="t-response">github.create_issue &rarr; repo:ordo &rarr; label:bug</span></div>
+        <div class="t-line"><span class="t-prompt t-arrow">&rarr;</span><span class="t-action">Issue #247 created: "Fix login timeout on mobile"</span></div>
         <div class="t-line t-gap"><span class="t-prompt">you</span><span class="t-voice">"Note: FSRTEK insoles cost 5 to 15 dollars at volume"</span></div>
-        <div class="t-line"><span class="t-prompt">ordo</span><span class="t-response">notes.save → tagged: #hardware #pricing</span></div>
-        <div class="t-line"><span class="t-prompt t-arrow">→</span><span class="t-action">Note saved.<span class="t-cursor" aria-hidden="true"></span></span></div>
+        <div class="t-line"><span class="t-prompt">ordo</span><span class="t-response">notes.save &rarr; tagged: #hardware #pricing</span></div>
+        <div class="t-line"><span class="t-prompt t-arrow">&rarr;</span><span class="t-action">Note saved.<span class="t-cursor" aria-hidden="true"></span></span></div>
       </div>
     </div>
   </div>
@@ -338,6 +349,9 @@
 
     <div class="cases-grid">
       <article class="case-card reveal" style="--delay:0.05s">
+        <div class="case-image-placeholder">
+          <span class="placeholder-label">Developer at desk<br>using Ordo hands-free</span>
+        </div>
         <div class="case-tag">Developer</div>
         <h3>Slack + GitHub</h3>
         <p>Send DMs, post to channels, create issues, list PRs — without switching context.</p>
@@ -345,6 +359,9 @@
       </article>
 
       <article class="case-card reveal" style="--delay:0.15s">
+        <div class="case-image-placeholder">
+          <span class="placeholder-label">Person walking<br>capturing a note</span>
+        </div>
         <div class="case-tag">Productivity</div>
         <h3>Notes + Calendar</h3>
         <p>Capture ideas the moment they hit. Schedule meetings while walking. Search notes by voice.</p>
@@ -352,6 +369,9 @@
       </article>
 
       <article class="case-card reveal" style="--delay:0.25s">
+        <div class="case-image-placeholder">
+          <span class="placeholder-label">Camera POV<br>scanning a whiteboard</span>
+        </div>
         <div class="case-tag">Vision</div>
         <h3>Visual AI</h3>
         <p>Read whiteboards, scan business cards, identify components, translate signs — all through the camera.</p>
@@ -370,9 +390,7 @@
         AI should work <em>with</em> you —<br>not through a screen.
       </h2>
       <p class="mission-body">
-        70% of your day happens away from a keyboard. Walking, commuting, cooking, building.
-        We're creating an AI that lives in those moments — always listening, always ready,
-        never in the way. Always listening, always ready.
+        Walking, commuting, cooking, building — the moments that matter most happen away from a keyboard. We're creating an AI that lives in those moments. Always listening, always ready, never in the way.
       </p>
     </div>
   </div>
@@ -407,8 +425,8 @@
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="assets/images/ordo.jpg" alt="Ordo logo" style="height:32px;width:32px;border-radius:50%;object-fit:cover;">
-        ORDO
+        <img src="assets/images/ordo.jpg" alt="Ordo logo" style="height:28px;width:28px;border-radius:50%;object-fit:cover;">
+        Ordo
       </div>
       <div class="footer-cols">
         <div class="footer-col">

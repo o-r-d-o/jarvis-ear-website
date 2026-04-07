@@ -406,12 +406,16 @@
       <h2 id="waitlist-heading" class="waitlist-title">Get Ordo <em>first.</em></h2>
       <p class="waitlist-desc">Join the waitlist for early access pricing and dev kit availability.</p>
 
-      <form class="waitlist-form" id="waitlistForm">
-        <input type="email" class="waitlist-input" placeholder="you@email.com" required aria-label="Email address" autocomplete="email">
-        <button type="submit" class="waitlist-btn">
-          <span>Join</span>
+      <form class="waitlist-form-stack" id="waitlistForm">
+        <div class="waitlist-fields">
+          <input type="text" class="waitlist-input" name="name" placeholder="Your name" required aria-label="Your name" autocomplete="name">
+          <input type="email" class="waitlist-input" name="email" placeholder="you@email.com" required aria-label="Email address" autocomplete="email">
+        </div>
+        <button type="submit" class="waitlist-btn-full" id="waitlistBtn">
+          <span>Join Waitlist</span>
           <span class="btn-shimmer" aria-hidden="true"></span>
         </button>
+        <p class="waitlist-error" id="waitlistError" aria-live="polite"></p>
       </form>
 
       <p class="waitlist-note">No spam. We'll email you once when it ships.</p>

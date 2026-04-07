@@ -1147,54 +1147,77 @@ nav.scrolled {
   line-height: 1.65;
 }
 
-.waitlist-form {
+.waitlist-form-stack {
   display: flex;
-  gap: 0;
-  border: 1px solid var(--border-light);
-  border-radius: 100px;
-  overflow: hidden;
-  transition: border-color 0.4s, box-shadow 0.4s;
-  background: var(--bg-card);
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 0 auto;
 }
-.waitlist-form:focus-within {
-  border-color: var(--accent-mid);
-  box-shadow: 0 0 0 4px var(--accent-soft);
+
+.waitlist-fields {
+  display: flex;
+  gap: 12px;
 }
 
 .waitlist-input {
   flex: 1;
   font-family: var(--sans);
   font-size: 15px;
-  padding: 18px 28px;
-  background: transparent;
+  padding: 16px 20px;
+  background: var(--bg-card);
   color: var(--text);
-  border: none;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
   outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.waitlist-input:focus {
+  border-color: var(--accent-mid);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 .waitlist-input::placeholder { color: var(--text-3); }
 
-.waitlist-btn {
+.waitlist-btn-full {
   position: relative;
   overflow: hidden;
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  padding: 18px 32px;
+  padding: 16px 32px;
   background: var(--accent);
   color: var(--bg);
   border: none;
-  border-radius: 100px;
+  border-radius: 12px;
   cursor: pointer;
-  margin: 4px;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.3s, transform 0.2s, opacity 0.3s;
   white-space: nowrap;
+  width: 100%;
 }
-.waitlist-btn:hover {
+.waitlist-btn-full:hover {
   box-shadow: 0 4px 24px var(--accent-glow);
+  transform: translateY(-1px);
 }
-.waitlist-btn:hover .btn-shimmer {
+.waitlist-btn-full:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+.waitlist-btn-full:hover .btn-shimmer {
   transform: translateX(100%);
   transition: transform 0.65s ease;
+}
+
+.waitlist-error {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: #f87171;
+  min-height: 18px;
+  text-align: center;
+}
+
+.waitlist-success {
+  background: var(--green) !important;
 }
 
 .waitlist-note {
@@ -1331,8 +1354,7 @@ footer {
 
   .pipeline-num { font-size: 48px; }
 
-  .waitlist-form { flex-direction: column; border-radius: 16px; }
-  .waitlist-btn { border-radius: 100px; margin: 4px; }
+  .waitlist-fields { flex-direction: column; }
 
   .footer-cols { flex-direction: column; gap: 32px; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }

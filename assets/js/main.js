@@ -117,24 +117,61 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ─── Waitlist form ───
+// ─── Waitlist form — Supabase ───
+const SUPABASE_URL = 'https://mynmpjnecxseeaqkurjy.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im15bm1wam5lY3hzZWVhcWt1cmp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1ODM0MzQsImV4cCI6MjA5MTE1OTQzNH0.Khfb2ycvnm4Sjbfx8rukg1M9DYgFxFOU34j2BkZearA';
+
 const waitlistForm = document.getElementById('waitlistForm');
 if (waitlistForm) {
-  waitlistForm.addEventListener('submit', function(e) {
+  waitlistForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const input = this.querySelector('input');
-    const btn = this.querySelector('button span:first-child');
+    const nameInput = this.querySelector('input[name="name"]');
+    const emailInput = this.querySelector('input[name="email"]');
+    const btn = document.getElementById('waitlistBtn');
+    const btnText = btn.querySelector('span:first-child');
+    const errorEl = document.getElementById('waitlistError');
 
-    btn.textContent = 'Joining...';
+    errorEl.textContent = '';
+    btn.disabled = true;
+    btnText.textContent = 'Joining...';
 
-    setTimeout(() => {
-      btn.textContent = "You're in";
-      this.querySelector('button').style.background = 'var(--green)';
-      input.value = '';
-      input.placeholder = 'Welcome aboard.';
-      input.disabled = true;
-      this.querySelector('button').disabled = true;
-    }, 800);
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          name: nameInput.value.trim(),
+          email: emailInput.value.trim().toLowerCase()
+        })
+      });
+
+      if (res.ok) {
+        btnText.textContent = "You're in!";
+        btn.classList.add('waitlist-success');
+        nameInput.value = '';
+        emailInput.value = '';
+        nameInput.disabled = true;
+        emailInput.disabled = true;
+      } else {
+        const data = await res.json();
+        if (data.code === '23505') {
+          errorEl.textContent = 'This email is already on the waitlist.';
+        } else {
+          errorEl.textContent = 'Something went wrong. Please try again.';
+        }
+        btn.disabled = false;
+        btnText.textContent = 'Join Waitlist';
+      }
+    } catch (err) {
+      errorEl.textContent = 'Network error. Please try again.';
+      btn.disabled = false;
+      btnText.textContent = 'Join Waitlist';
+    }
   });
 }
 

@@ -3,6 +3,47 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")!;
+const STRIPE_WEBHOOK_SECRET = Deno.env.get("STRIPE_WEBHOOK_SECRET")!;
+
+async function verifyStripeSignature(
+  payload: string,
+  sigHeader: string,
+  secret: string,
+): Promise<boolean> {
+  const parts = Object.fromEntries(
+    sigHeader.split(",").map((part) => {
+      const [key, value] = part.split("=");
+      return [key, value];
+    }),
+  );
+
+  const timestamp = parts["t"];
+  const signature = parts["v1"];
+  if (!timestamp || !signature) return false;
+
+  // Reject events older than 5 minutes to prevent replay attacks
+  const age = Math.floor(Date.now() / 1000) - parseInt(timestamp);
+  if (age > 300) return false;
+
+  const signedPayload = `${timestamp}.${payload}`;
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const sig = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    new TextEncoder().encode(signedPayload),
+  );
+  const expected = Array.from(new Uint8Array(sig))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  return expected === signature;
+}
 
 async function sendConfirmationEmail(name: string, email: string) {
   const firstName = name.split(" ")[0];
@@ -117,6 +158,23 @@ async function sendConfirmationEmail(name: string, email: string) {
 Deno.serve(async (req) => {
   try {
     const body = await req.text();
+    const sigHeader = req.headers.get("stripe-signature");
+
+    if (!sigHeader) {
+      return new Response(JSON.stringify({ error: "Missing signature" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const valid = await verifyStripeSignature(body, sigHeader, STRIPE_WEBHOOK_SECRET);
+    if (!valid) {
+      return new Response(JSON.stringify({ error: "Invalid signature" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     const event = JSON.parse(body);
 
     // Only handle completed checkout sessions

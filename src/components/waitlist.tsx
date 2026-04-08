@@ -3,9 +3,6 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { ScrollReveal } from "./scroll-reveal";
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
 export function Waitlist() {
   const [step, setStep] = useState<"form" | "preorder" | "success">("form");
   const [loading, setLoading] = useState(false);
@@ -31,12 +28,9 @@ export function Waitlist() {
     const emailVal = (form.elements.namedItem("email") as HTMLInputElement).value.trim().toLowerCase();
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/waitlist-signup`, {
+      const res = await fetch("/api/waitlist-signup", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email: emailVal }),
       });
 
@@ -59,12 +53,9 @@ export function Waitlist() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/create-checkout`, {
+      const res = await fetch("/api/create-checkout", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 

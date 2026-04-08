@@ -39,7 +39,7 @@ export function Nav() {
           {/* CTA */}
           <a
             href="#waitlist"
-            className="nav-cta relative hidden overflow-hidden rounded-full bg-accent px-6 py-2.5 text-[13px] font-semibold text-bg no-underline transition-transform hover:-translate-y-px hover:shadow-[0_4px_24px_var(--accent-glow)] sm:inline-flex"
+            className="nav-cta relative hidden overflow-hidden rounded-full bg-accent px-6 py-2.5 text-[13px] font-semibold text-white no-underline transition-transform hover:-translate-y-px hover:shadow-[0_4px_24px_var(--accent-glow)] sm:inline-flex"
           >
             <span>Join Waitlist</span>
             <span className="nav-cta-shimmer" aria-hidden="true" />
@@ -60,12 +60,12 @@ export function Nav() {
 
       {/* Mobile menu */}
       <div
-        className={`mobile-menu fixed top-[72px] right-0 left-0 z-[999] flex flex-col gap-6 border-b border-border bg-[rgba(10,10,10,0.97)] px-6 py-8 backdrop-blur-[20px] sm:hidden ${menuOpen ? "open" : ""}`}
+        className={`mobile-menu fixed top-[72px] right-0 left-0 z-[999] flex flex-col gap-6 border-b border-border bg-[rgba(248,245,241,0.97)] px-6 py-8 backdrop-blur-[20px] sm:hidden ${menuOpen ? "open" : ""}`}
       >
         <a href="#features" onClick={closeMenu} className="font-serif text-2xl text-text-2 no-underline transition-colors hover:text-text">Features</a>
         <a href="#how-it-works" onClick={closeMenu} className="font-serif text-2xl text-text-2 no-underline transition-colors hover:text-text">How it works</a>
         <a href="#use-cases" onClick={closeMenu} className="font-serif text-2xl text-text-2 no-underline transition-colors hover:text-text">Use cases</a>
-        <a href="#waitlist" onClick={closeMenu} className="inline-block rounded-full bg-accent px-7 py-3.5 text-center text-[15px] font-semibold text-bg no-underline">Join Waitlist</a>
+        <a href="#waitlist" onClick={closeMenu} className="inline-block rounded-full bg-accent px-7 py-3.5 text-center text-[15px] font-semibold text-white no-underline">Join Waitlist</a>
       </div>
     </>
   );

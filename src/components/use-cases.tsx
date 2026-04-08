@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ScrollReveal } from "./scroll-reveal";
 
 const CASES = [
@@ -6,7 +7,8 @@ const CASES = [
     title: "Slack + GitHub",
     desc: "Send DMs, post to channels, create issues, list PRs — without switching context.",
     example: '"Create an issue on ordo — fix auth timeout on mobile"',
-    placeholder: "Developer at desk\nusing Ordo hands-free",
+    image: "/usecase-developer.png",
+    imageAlt: "Developer at desk wearing Ordo device while coding",
     delay: 0.05,
   },
   {
@@ -14,7 +16,8 @@ const CASES = [
     title: "Notes + Calendar",
     desc: "Capture ideas the moment they hit. Schedule meetings while walking. Search notes by voice.",
     example: '"Schedule a call with Raj tomorrow at 3pm"',
-    placeholder: "Person walking\ncapturing a note",
+    image: "/usecase-walking.png",
+    imageAlt: "Person walking through park wearing Ordo device",
     delay: 0.15,
   },
   {
@@ -22,10 +25,11 @@ const CASES = [
     title: "Visual AI",
     desc: "Read whiteboards, scan business cards, identify components, translate signs — all through the camera.",
     example: '"What does this circuit board component say?"',
-    placeholder: "Camera POV\nscanning a whiteboard",
+    image: "/usecase-whiteboard.png",
+    imageAlt: "Whiteboard with diagrams and sticky notes from Ordo camera view",
     delay: 0.25,
   },
-] as const;
+];
 
 export function UseCases() {
   return (
@@ -44,11 +48,15 @@ export function UseCases() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {CASES.map((c) => (
             <ScrollReveal key={c.title} className="case-card relative bg-bg-card px-9 py-11" delay={c.delay}>
-              {/* Image placeholder */}
-              <div className="case-image-placeholder relative mb-7 flex h-[180px] w-full items-center justify-center overflow-hidden bg-bg-warm">
-                <span className="whitespace-pre-line text-center font-mono text-[11px] uppercase tracking-[2px] text-text-3 opacity-50 leading-relaxed">
-                  {c.placeholder}
-                </span>
+              {/* Image */}
+              <div className="relative mb-7 h-[180px] w-full overflow-hidden rounded-sm">
+                <Image
+                  src={c.image}
+                  alt={c.imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                />
               </div>
 
               <div className="mb-5 font-mono text-[9px] uppercase tracking-[2.5px] text-text-3">{c.tag}</div>

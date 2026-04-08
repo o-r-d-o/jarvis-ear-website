@@ -7,22 +7,8 @@ export function LifestyleBreak() {
   const sectionRef = useRef<HTMLElement>(null);
   const wordsRef = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
-    const bg = bgRef.current;
-    const section = sectionRef.current;
-    if (!bg || !section) return;
-
-    const handler = () => {
-      const rect = section.getBoundingClientRect();
-      const viewH = window.innerHeight;
-      if (rect.top < viewH && rect.bottom > 0) {
-        const progress = (viewH - rect.top) / (viewH + rect.height);
-        bg.style.transform = `translateY(${progress * -30}px) scale(1.05)`;
-      }
-    };
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
+  // bgRef kept for potential future parallax
+  void bgRef;
 
   // Word-by-word reveal
   useEffect(() => {
@@ -70,11 +56,10 @@ export function LifestyleBreak() {
   return (
     <section
       ref={sectionRef}
-      className="reveal relative flex h-[60vh] min-h-[400px] items-center justify-center overflow-hidden sm:h-[50vh] lg:h-[70vh] lg:min-h-[500px]"
+      className="relative flex items-center justify-center overflow-hidden py-24 lg:py-32"
       aria-label="Brand statement"
     >
-      <div ref={bgRef} className="absolute inset-0 bg-bg-warm" aria-hidden="true" />
-      <div className="lifestyle-overlay absolute inset-0" aria-hidden="true" />
+      <div ref={bgRef} className="absolute inset-0 bg-bg-elevated" aria-hidden="true" />
       <div className="relative z-[1] max-w-[700px] px-10 text-center">
         <p
           ref={wordsRef}

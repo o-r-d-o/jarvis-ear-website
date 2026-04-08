@@ -3,14 +3,16 @@
 import { useCallback, type MouseEvent } from "react";
 import { ScrollReveal } from "./scroll-reveal";
 
+import Image from "next/image";
+
 interface Feature {
   icon: string;
   title: string;
   desc: string;
   tag?: string;
   hero?: boolean;
-  hasPlaceholder?: boolean;
-  placeholderLabel?: string;
+  image?: string;
+  imageAlt?: string;
   reversed?: boolean;
   accentClass?: string;
 }
@@ -22,8 +24,8 @@ const FEATURES: Feature[] = [
     desc: "Speak naturally. Ordo understands context, parses intent, and executes. No wake words, no menus, no friction.",
     tag: "Natural Language",
     hero: true,
-    hasPlaceholder: true,
-    placeholderLabel: "Lifestyle photo\nPerson speaking to Ordo",
+    image: "/lifestyle-voice.png",
+    imageAlt: "Woman wearing Ordo device while walking through a sunlit city",
   },
   {
     icon: "camera",
@@ -53,8 +55,8 @@ const FEATURES: Feature[] = [
     desc: "Lighter than most earbuds. Ni-Ti shape memory ear hook adapts to any ear and stays put all day. You forget it's there.",
     tag: "Featherweight",
     hero: true,
-    hasPlaceholder: true,
-    placeholderLabel: "Product close-up\nBehind-ear detail shot",
+    image: "/closeup-ear-1.png",
+    imageAlt: "Close-up of Ordo behind-ear device with camera lens visible",
     reversed: true,
   },
 ];
@@ -85,7 +87,7 @@ function FeatureCard({
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
-    e.currentTarget.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(232,168,124,0.04) 0%, var(--bg-card) 60%)`;
+    e.currentTarget.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(200,118,74,0.06) 0%, var(--bg-card) 60%)`;
   }, []);
 
   const handleMouseLeave = useCallback((e: MouseEvent<HTMLElement>) => {
@@ -93,12 +95,18 @@ function FeatureCard({
   }, []);
 
   if (feature.hero) {
-    const placeholder = (
-      <div className="relative flex h-[280px] w-full items-center justify-center overflow-hidden bg-bg-warm feature-image-placeholder">
-        <span className="whitespace-pre-line text-center font-mono text-[11px] uppercase tracking-[2px] text-text-3 opacity-50 leading-relaxed">
-          {feature.placeholderLabel}
-        </span>
+    const imageBlock = feature.image ? (
+      <div className="relative h-[280px] w-full overflow-hidden rounded-sm">
+        <Image
+          src={feature.image}
+          alt={feature.imageAlt ?? ""}
+          fill
+          className="object-cover"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+        />
       </div>
+    ) : (
+      <div className="relative flex h-[280px] w-full items-center justify-center overflow-hidden bg-bg-warm" />
     );
 
     return (
@@ -106,14 +114,14 @@ function FeatureCard({
         className="feature-card col-span-1 grid min-h-[400px] items-center gap-12 bg-bg-card p-10 lg:col-span-2 lg:grid-cols-2 lg:p-16"
         delay={delay}
       >
-        {feature.reversed ? placeholder : null}
+        {feature.reversed ? imageBlock : null}
         <div>
           <FeatureIcon icon={feature.icon} className={feature.accentClass} />
           <h3 className="mb-3 font-serif text-2xl font-normal tracking-[-0.5px] text-text">{feature.title}</h3>
           <p className="max-w-[400px] text-[15px] leading-[1.7] text-text-2">{feature.desc}</p>
           {feature.tag && <div className="mt-6 font-mono text-[10px] uppercase tracking-[2px] text-text-3">{feature.tag}</div>}
         </div>
-        {!feature.reversed ? placeholder : null}
+        {!feature.reversed ? imageBlock : null}
       </ScrollReveal>
     );
   }

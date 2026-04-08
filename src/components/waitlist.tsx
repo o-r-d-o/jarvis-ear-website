@@ -112,7 +112,7 @@ export function Waitlist() {
               <button
                 type="submit"
                 disabled={loading}
-                className="waitlist-btn relative w-full overflow-hidden rounded-xl bg-accent px-8 py-4 text-[15px] font-semibold text-bg transition-[box-shadow,transform,opacity] duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
+                className="waitlist-btn relative w-full overflow-hidden rounded-xl bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-[box-shadow,transform,opacity] duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
               >
                 <span>{loading ? "Joining..." : "Join Waitlist"}</span>
                 <span className="btn-shimmer" aria-hidden="true" />
@@ -128,7 +128,7 @@ export function Waitlist() {
               <button
                 onClick={handlePreorder}
                 disabled={loading}
-                className="preorder-btn waitlist-btn relative w-full overflow-hidden rounded-xl bg-accent px-9 py-[18px] text-base font-semibold text-bg transition-[box-shadow,transform,opacity] duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
+                className="preorder-btn waitlist-btn relative w-full overflow-hidden rounded-xl bg-accent px-9 py-[18px] text-base font-semibold text-white transition-[box-shadow,transform,opacity] duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
               >
                 <span>{loading ? "Redirecting to checkout..." : "Pre-order for $80"}</span>
                 <span className="btn-shimmer" aria-hidden="true" />

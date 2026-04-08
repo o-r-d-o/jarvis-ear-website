@@ -52,13 +52,13 @@ export function TerminalDemo() {
   }, []);
 
   return (
-    <div ref={terminalRef} className="mx-auto max-w-[720px] overflow-hidden border border-border bg-bg-card">
+    <div ref={terminalRef} className="mx-auto max-w-[720px] overflow-hidden rounded-xl border border-[#1c1c1c] bg-[#0a0a0a]">
       {/* Title bar */}
-      <div className="flex items-center gap-2 border-b border-border px-6 py-4">
+      <div className="flex items-center gap-2 border-b border-[#1c1c1c] px-6 py-4">
         <span className="h-2 w-2 rounded-full opacity-60" style={{ background: "#ff5f57" }} />
         <span className="h-2 w-2 rounded-full opacity-60" style={{ background: "#febc2e" }} />
         <span className="h-2 w-2 rounded-full opacity-60" style={{ background: "#28c840" }} />
-        <span className="ml-2 font-mono text-[11px] tracking-[1px] text-text-3">ordo</span>
+        <span className="ml-2 font-mono text-[11px] tracking-[1px] text-[#5a5550]">ordo</span>
       </div>
 
       {/* Lines */}

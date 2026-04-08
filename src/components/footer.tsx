@@ -20,12 +20,11 @@ export function Footer() {
               { label: "Waitlist", href: "#waitlist" },
             ]} />
             <FooterCol title="Community" links={[
-              { label: "GitHub", href: "https://github.com", external: true },
-              { label: "Discord", href: "https://discord.gg", external: true },
-              { label: "X / Twitter", href: "https://x.com", external: true },
+              { label: "X / Twitter", href: "https://x.com/ordospaces", external: true },
+              { label: "LinkedIn", href: "https://www.linkedin.com/company/ordospaces/", external: true },
             ]} />
             <FooterCol title="Company" links={[
-              { label: "Contact", href: "mailto:hello@ordospaces.com" },
+              { label: "Contact", href: "mailto:support@ordospaces.com" },
               { label: "Privacy", href: "/privacy" },
               { label: "Terms", href: "/terms" },
               { label: "Refund Policy", href: "/refund" },

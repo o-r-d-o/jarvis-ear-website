@@ -15,21 +15,17 @@ export async function POST(request: Request) {
       );
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
     const supabase = createServerClient();
-    const { data: entry, error: lookupError } = await supabase
+
+    // Look up the waitlist entry — it may not exist yet if signup is still in flight
+    const { data: entry } = await supabase
       .from("waitlist")
       .select("id, name, email, paid")
-      .eq("email", email.trim().toLowerCase())
+      .eq("email", normalizedEmail)
       .single();
 
-    if (lookupError || !entry) {
-      return NextResponse.json(
-        { error: "Please join the waitlist first." },
-        { status: 404 },
-      );
-    }
-
-    if (entry.paid) {
+    if (entry?.paid) {
       return NextResponse.json(
         { error: "You've already pre-ordered!" },
         { status: 400 },
@@ -38,10 +34,10 @@ export async function POST(request: Request) {
 
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
-      customer_email: entry.email,
+      customer_email: normalizedEmail,
       metadata: {
-        waitlist_id: entry.id,
-        name: entry.name,
+        waitlist_id: entry?.id ?? "",
+        name: entry?.name ?? "",
       },
       line_items: [
         {

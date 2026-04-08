@@ -4,10 +4,9 @@ import { useState, useEffect, type FormEvent } from "react";
 import { ScrollReveal } from "./scroll-reveal";
 
 export function Waitlist() {
-  const [step, setStep] = useState<"form" | "preorder" | "success">("form");
+  const [step, setStep] = useState<"form" | "success">("form");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
 
   // Check for payment return
   useEffect(() => {
@@ -18,7 +17,7 @@ export function Waitlist() {
     }
   }, []);
 
-  async function handleWaitlist(e: FormEvent<HTMLFormElement>) {
+  async function handlePreorder(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -27,36 +26,18 @@ export function Waitlist() {
     const name = (form.elements.namedItem("name") as HTMLInputElement).value.trim();
     const emailVal = (form.elements.namedItem("email") as HTMLInputElement).value.trim().toLowerCase();
 
-    try {
-      const res = await fetch("/api/waitlist-signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email: emailVal }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        setEmail(emailVal);
-        setStep("preorder");
-      } else {
-        setError(data.error || "Something went wrong. Please try again.");
-      }
-    } catch {
-      setError("Network error. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function handlePreorder() {
-    setLoading(true);
+    // Waitlist signup in the background — don't block on it
+    fetch("/api/waitlist-signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email: emailVal }),
+    }).catch(() => {});
 
     try {
       const res = await fetch("/api/create-checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: emailVal }),
       });
 
       const data = await res.json();
@@ -64,11 +45,11 @@ export function Waitlist() {
       if (res.ok && data.url) {
         window.location.href = data.url;
       } else {
-        setError(data.error || "Something went wrong");
+        setError(data.error || "Something went wrong. Please try again.");
         setLoading(false);
       }
     } catch {
-      setError("Network error. Try again.");
+      setError("Network error. Please try again.");
       setLoading(false);
     }
   }
@@ -83,12 +64,12 @@ export function Waitlist() {
             Get Ordo <em className="italic text-accent">first.</em>
           </h2>
           <p className="mb-10 text-base leading-[1.65] text-text-2">
-            Join the waitlist for early access pricing and dev kit availability.
+            Pre-order now for early access pricing and dev kit availability.
           </p>
 
-          {/* Step 1: Join Waitlist */}
+          {/* Pre-order form */}
           {step === "form" && (
-            <form onSubmit={handleWaitlist} className="mx-auto flex max-w-[400px] flex-col gap-3">
+            <form onSubmit={handlePreorder} className="mx-auto flex max-w-[400px] flex-col gap-3">
               <div className="flex flex-col gap-3 sm:flex-row">
                 <input
                   type="text"
@@ -112,33 +93,16 @@ export function Waitlist() {
               <button
                 type="submit"
                 disabled={loading}
-                className="waitlist-btn relative w-full overflow-hidden rounded-xl bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-[box-shadow,transform,opacity] duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
+                className="preorder-btn waitlist-btn relative w-full overflow-hidden rounded-xl bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-[box-shadow,transform,opacity] duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
               >
-                <span>{loading ? "Joining..." : "Join Waitlist"}</span>
+                <span>{loading ? "Redirecting to checkout..." : "Pre-order for $80"}</span>
                 <span className="btn-shimmer" aria-hidden="true" />
               </button>
               {error && <p className="min-h-[18px] text-center font-mono text-xs text-[#f87171]" aria-live="polite">{error}</p>}
             </form>
           )}
 
-          {/* Step 2: Pre-order */}
-          {step === "preorder" && (
-            <div className="mx-auto max-w-[400px] text-center">
-              <p className="mb-5 font-serif text-xl italic text-text">You&apos;re on the list! Want to lock in your unit?</p>
-              <button
-                onClick={handlePreorder}
-                disabled={loading}
-                className="preorder-btn waitlist-btn relative w-full overflow-hidden rounded-xl bg-accent px-9 py-[18px] text-base font-semibold text-white transition-[box-shadow,transform,opacity] duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                <span>{loading ? "Redirecting to checkout..." : "Pre-order for $80"}</span>
-                <span className="btn-shimmer" aria-hidden="true" />
-              </button>
-              <p className="mt-3 font-mono text-[11px] tracking-[0.5px] text-text-3">Secure your spot. Ships when ready.</p>
-              {error && <p className="mt-2 font-mono text-xs text-[#f87171]" aria-live="polite">{error}</p>}
-            </div>
-          )}
-
-          {/* Step 3: Success */}
+          {/* Success */}
           {step === "success" && (
             <div className="mx-auto max-w-[400px] text-center">
               <p className="mb-3 font-serif text-xl italic text-green">Pre-order confirmed!</p>
@@ -150,7 +114,7 @@ export function Waitlist() {
 
           {step === "form" && (
             <p className="mt-5 font-mono text-[11px] tracking-[0.5px] text-text-3">
-              No spam. We&apos;ll email you once when it ships.
+              Secure your spot. Ships when ready.
             </p>
           )}
         </ScrollReveal>

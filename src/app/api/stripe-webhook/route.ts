@@ -25,25 +25,46 @@ export async function POST(request: Request) {
 
     const session = event.data.object;
     const waitlistId = session.metadata?.waitlist_id;
-
-    if (!waitlistId) {
-      console.error("No waitlist_id in session metadata");
-      return NextResponse.json({ received: true });
-    }
+    const customerEmail = session.customer_email;
 
     const supabase = createServerClient();
-    const { data: entry, error } = await supabase
-      .from("waitlist")
-      .update({
-        paid: true,
-        stripe_session_id: session.id,
-        amount_paid: session.amount_total ?? 8000,
-      })
-      .eq("id", waitlistId)
-      .select("name, email")
-      .single();
 
-    if (!error && entry) {
+    // Try updating by waitlist_id first, fall back to email lookup
+    let entry: { name: string; email: string } | null = null;
+
+    if (waitlistId) {
+      const { data, error } = await supabase
+        .from("waitlist")
+        .update({
+          paid: true,
+          stripe_session_id: session.id,
+          amount_paid: session.amount_total ?? 8000,
+        })
+        .eq("id", waitlistId)
+        .select("name, email")
+        .single();
+
+      if (!error && data) entry = data;
+    }
+
+    // Fallback: match by email if waitlist_id was empty (race condition)
+    if (!entry && customerEmail) {
+      const { data, error } = await supabase
+        .from("waitlist")
+        .update({
+          paid: true,
+          stripe_session_id: session.id,
+          amount_paid: session.amount_total ?? 8000,
+        })
+        .eq("email", customerEmail)
+        .eq("paid", false)
+        .select("name, email")
+        .single();
+
+      if (!error && data) entry = data;
+    }
+
+    if (entry) {
       const firstName = entry.name.split(" ")[0];
       await getResend().emails.send({
         from: "Ordo <hello@ordospaces.com>",

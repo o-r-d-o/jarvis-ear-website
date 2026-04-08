@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════
+   ORDO — Design Tokens
+   ═══════════════════════════════════════════ */
+:root {
+  /* Warm accent palette */
+  --accent: #e8a87c;
+  --accent-soft: rgba(232, 168, 124, 0.08);
+  --accent-mid: rgba(232, 168, 124, 0.25);
+  --accent-glow: rgba(232, 168, 124, 0.15);
+  --accent-bright: #f0c27a;
+
+  /* Neutrals */
+  --bg: #0a0a0a;
+  --bg-card: #111111;
+  --bg-elevated: #161616;
+  --bg-warm: #1a1816;
+  --border: #1c1c1c;
+  --border-light: #252525;
+
+  /* Text hierarchy */
+  --text: #f5f0eb;
+  --text-2: #908882;
+  --text-3: #5a5550;
+
+  /* Semantic */
+  --green: #b8c9a3;
+  --amber: #d4a574;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-dramatic: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-instrument-sans);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-mid: var(--accent-mid);
+  --color-accent-glow: var(--accent-glow);
+  --color-accent-bright: var(--accent-bright);
+
+  --color-bg: var(--bg);
+  --color-bg-card: var(--bg-card);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-warm: var(--bg-warm);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+
+  --color-green: var(--green);
+  --color-amber: var(--amber);
+}
+
+/* ═══════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════ */
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+
+section[id] { scroll-margin-top: 80px; }
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════ */
+.anim-in {
+  opacity: 0;
+  transform: translateY(32px);
+  animation: animIn 1s var(--ease-dramatic) forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes animIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-dramatic), transform 0.8s var(--ease-dramatic);
+  transition-delay: var(--delay, 0s);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Word reveal */
+.word-reveal .word {
+  display: inline-block;
+  opacity: 0.15;
+  transition: opacity 0.5s var(--ease-smooth);
+}
+.word-reveal .word.lit { opacity: 1; }
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px;
+}
+
+/* Pulse animation for badge dot */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Device float */
+@keyframes deviceFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Cursor blink */
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Button shimmer */
+.btn-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  transform: translateX(-100%);
+}
